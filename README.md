@@ -1,5 +1,6 @@
 # variable-diff
 Visual diff between 2 javascript variables. Shows only the difference and ignores keys that are the same. Diff is formatted in an easy to read format.
+
 [![Build Status](https://travis-ci.org/taylorhakes/variable-diff.svg?branch=master)](https://travis-ci.org/taylorhakes/variable-diff)
 
 ## Use
