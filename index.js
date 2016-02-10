@@ -51,11 +51,11 @@ function keyChanged(key, text) {
 }
 
 function keyRemoved(key, variable) {
-  return indent + options.wrap('removed', key + ': ' + printVar(variable)) + options.newLineChar;
+  return options.wrap('removed', '- ' + key + ': ' + printVar(variable)) + options.newLineChar;
 }
 
 function keyAdded(key, variable) {
-  return indent + options.wrap('added', key + ': ' + printVar(variable)) + options.newLineChar;
+  return options.wrap('added', '+ ' + key + ': ' + printVar(variable)) + options.newLineChar;
 }
 
 function diff(left, right) {
@@ -118,7 +118,7 @@ function diff(left, right) {
     }
 
   } else if (left !== right) {
-    text = options.wrap('modified', printVar(left) + ' != ' + printVar(right));
+    text = options.wrap('modified', printVar(left) + ' => ' + printVar(right));
     changed = true;
   }
 
