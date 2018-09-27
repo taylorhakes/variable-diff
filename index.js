@@ -58,12 +58,17 @@ function keyAdded(key, variable) {
   return options.wrap('added', '+ ' + key + ': ' + printVar(variable)) + options.newLineChar;
 }
 
-function diff(left, right) {
+function diff(left, right, opts) {
   var text = '';
   var changed = false;
   var itemDiff;
   var keys;
   var subOutput = '';
+
+  options = objectAssign(options, opts)
+  if (options.noColor) {
+    options.wrap = function(type, text) {return text}
+  }
 
   if (Array.isArray(left) && Array.isArray(right)) {
     for (var i = 0; i < left.length; i++) {
