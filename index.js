@@ -1,7 +1,6 @@
 'use strict';
 
 var chalk = require('chalk');
-var objectAssign = require('object-assign');
 
 var typeColors = {
   modified: 'yellow',
@@ -89,7 +88,7 @@ function diff(left, right) {
     }
   } else if (isObject(left) && isObject(right)) {
     keys = Object.keys(left);
-    var rightObj = objectAssign({}, right);
+    var rightObj = Object.assign({}, right);
     var key;
     keys.sort();
     for (var i = 0; i < keys.length; i++) {
