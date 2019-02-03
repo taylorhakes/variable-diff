@@ -9,6 +9,9 @@
   "devDependencies": {
     "tap": "^5.4.2"
   },
+  "engines": {
+    "node": ">=4.0"
+  },
   "scripts": {
     "test": "tap test.js"
   },
