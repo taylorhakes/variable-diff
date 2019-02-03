@@ -15,7 +15,7 @@ var result = diff({ a: 1, b: 2, d: 'hello' }, { a: 8, b: 2, c: 4});
 console.log(result.text);
 ```
 
-![output](http://i.imgur.com/3cOu6Wr.png?1)
+![output](https://i.imgur.com/5NmBjqe.png)
 
 ### Test
 ```
