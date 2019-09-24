@@ -11,11 +11,19 @@ npm install variable-diff
 ```js
 var diff = require('variable-diff');
 
-var result = diff({ a: 1, b: 2, d: 'hello' }, { a: 8, b: 2, c: 4});
+var defaultOptions = {
+  indent: '  ',
+  newLine: '\n',
+  wrap: function wrap(type, text) {
+    return chalk[typeColors[type]](text);
+  },
+  color: true
+};
+
+var result = diff({ a: 1, b: 2, d: 'hello' }, { a: 8, b: 2, c: 4}, defaultOptions);
 console.log(result.text);
 ```
 
-![output](http://i.imgur.com/3cOu6Wr.png?1)
 
 ### Test
 ```
