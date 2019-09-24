@@ -3,7 +3,7 @@ var diff = require('./');
 var test = tap.test;
 
 test('null no diff', function(t) {
-  t.same(diff(null, null), {
+  t.same(diff(null, null, {color: false}), {
     changed: false,
     text: ''
   });
@@ -11,7 +11,7 @@ test('null no diff', function(t) {
 });
 
 test('null and object', function(t) {
-  t.same(diff(null, { a: 1 }), {
+  t.same(diff(null, { a: 1 }, {color: false}), {
     changed: true,
     text: 'null => {"a":1}'
   });
@@ -19,7 +19,7 @@ test('null and object', function(t) {
 });
 
 test('null and string', function(t) {
-  t.same(diff(null, 'b'), {
+  t.same(diff(null, 'b', {color: false}), {
     changed: true,
     text: 'null => "b"'
   });
@@ -27,7 +27,7 @@ test('null and string', function(t) {
 });
 
 test('undefined no diff', function(t) {
-  t.same(diff(undefined, undefined), {
+  t.same(diff(undefined, undefined, {color: false}), {
     changed: false,
     text: ''
   });
@@ -35,7 +35,7 @@ test('undefined no diff', function(t) {
 });
 
 test('undefined and number', function(t) {
-  t.same(diff(undefined, 21), {
+  t.same(diff(undefined, 21, {color: false}), {
     changed: true,
     text: 'undefined => 21'
   });
@@ -43,7 +43,7 @@ test('undefined and number', function(t) {
 });
 
 test('string no diff', function(t) {
-  t.same(diff('hello', 'hello'), {
+  t.same(diff('hello', 'hello', {color: false}), {
     changed: false,
     text: ''
   });
@@ -51,7 +51,7 @@ test('string no diff', function(t) {
 });
 
 test('string changed', function(t) {
-  t.same(diff('hello', 'hellos'), {
+  t.same(diff('hello', 'hellos', {color: false}), {
     changed: true,
     text: '"hello" => "hellos"'
   });
@@ -59,7 +59,7 @@ test('string changed', function(t) {
 });
 
 test('string to number', function(t) {
-  t.same(diff('fun', 9), {
+  t.same(diff('fun', 9, {color: false}), {
     changed: true,
     text: '"fun" => 9'
   });
@@ -67,7 +67,7 @@ test('string to number', function(t) {
 });
 
 test('string to function', function(t) {
-  t.same(diff('fun', function hello() { console.log('test') }), {
+  t.same(diff('fun', function hello() { console.log('test') }, {color: false}), {
     changed: true,
     text: '"fun" => function hello() {}'
   });
@@ -75,7 +75,7 @@ test('string to function', function(t) {
 });
 
 test('string to regex', function(t) {
-  t.same(diff('fun', /search/), {
+  t.same(diff('fun', /search/, {color: false}), {
     changed: true,
     text: '"fun" => /search/'
   });
@@ -83,14 +83,14 @@ test('string to regex', function(t) {
 });
 
 test('number not changed', function(t) {
-  t.same(diff(987, 987), {
+  t.same(diff(987, 987, {color: false}), {
     changed: false,
     text: ''
   });
   t.end();
 });
 test('number and string', function(t) {
-  t.same(diff(1, 'hellos'), {
+  t.same(diff(1, 'hellos', {color: false}), {
     changed: true,
     text: '1 => "hellos"'
   });
@@ -98,7 +98,7 @@ test('number and string', function(t) {
 });
 
 test('number and object', function(t) {
-  t.same(diff(9, { test: 1 }), {
+  t.same(diff(9, { test: 1 }, {color: false}), {
     changed: true,
     text: '9 => {"test":1}'
   });
@@ -107,7 +107,7 @@ test('number and object', function(t) {
 
 test('function not changed', function(t) {
   function myFunc() {}
-  t.same(diff(myFunc, myFunc), {
+  t.same(diff(myFunc, myFunc, {color: false}), {
     changed: false,
     text: ''
   });
@@ -115,7 +115,7 @@ test('function not changed', function(t) {
 });
 
 test('function same code different function', function(t) {
-  t.same(diff(function test() { console.log('1'); } , function test() { console.log('1'); }), {
+  t.same(diff(function test() { console.log('1'); } , function test() { console.log('1'); }, {color: false}), {
     changed: true,
     text: 'function test() {} => function test() {}'
   });
@@ -123,7 +123,7 @@ test('function same code different function', function(t) {
 });
 
 test('function and number', function(t) {
-  t.same(diff(function () { console.log('1'); } , 2), {
+  t.same(diff(function () { console.log('1'); } , 2, {color: false}), {
     changed: true,
     text: 'function () {} => 2'
   });
@@ -131,7 +131,7 @@ test('function and number', function(t) {
 });
 
 test('array switch index', function(t) {
-  t.same(diff([9,8,1], [8,9,1]), {
+  t.same(diff([9,8,1], [8,9,1], {color: false}), {
     changed: true,
     text: '[\n  0: 9 => 8\n  1: 8 => 9\n]'
   });
@@ -139,7 +139,7 @@ test('array switch index', function(t) {
 });
 
 test('array add 2 items', function(t) {
-  t.same(diff([8,9,1], [8,9,1,4,3]), {
+  t.same(diff([8,9,1], [8,9,1,4,3], {color: false}), {
     changed: true,
     text: '[\n+ 3: 4\n+ 4: 3\n]'
   });
@@ -147,7 +147,7 @@ test('array add 2 items', function(t) {
 });
 
 test('array remove 2 items', function(t) {
-  t.same(diff([9,8,7], [9]), {
+  t.same(diff([9,8,7], [9], {color: false}), {
     changed: true,
     text: '[\n- 1: 8\n- 2: 7\n]'
   });
@@ -155,7 +155,7 @@ test('array remove 2 items', function(t) {
 });
 
 test('array empty', function(t) {
-  t.same(diff([], []), {
+  t.same(diff([], [], {color: false}), {
     changed: false,
     text: ''
   });
@@ -163,7 +163,7 @@ test('array empty', function(t) {
 });
 
 test('array and object', function(t) {
-  t.same(diff([1,2], { key: 1 }), {
+  t.same(diff([1,2], { key: 1 }, {color: false}), {
     changed: true,
     text: '[1,2] => {"key":1}'
   });
@@ -171,7 +171,7 @@ test('array and object', function(t) {
 });
 
 test('array and null', function(t) {
-  t.same(diff([2], null), {
+  t.same(diff([2], null, {color: false}), {
     changed: true,
     text: '[2] => null'
   });
@@ -179,7 +179,7 @@ test('array and null', function(t) {
 });
 
 test('object same structure', function(t) {
-  t.same(diff({ test: 1, and: 'fun'}, { test: 1, and: 'fun'}), {
+  t.same(diff({ test: 1, and: 'fun'}, { test: 1, and: 'fun'}, {color: false}), {
     changed: false,
     text: ''
   });
@@ -187,7 +187,7 @@ test('object same structure', function(t) {
 });
 
 test('object nested object', function(t) {
-  t.same(diff({ test: { a: { b: 3, c: 5}}, and: 'fun'}, { test: { a: { b: 3, c: 5}}, and: 'fun'}), {
+  t.same(diff({ test: { a: { b: 3, c: 5}}, and: 'fun'}, { test: { a: { b: 3, c: 5}}, and: 'fun'}, {color: false}), {
     changed: false,
     text: ''
   });
@@ -195,7 +195,7 @@ test('object nested object', function(t) {
 });
 
 test('object nested object different', function(t) {
-  t.same(diff({ test: { a: { b: 3, c: 5}}, and: 'fun'}, { test: { a: { b: 3, c: 'test'}}, and: 'fun'}), {
+  t.same(diff({ test: { a: { b: 3, c: 5}}, and: 'fun'}, { test: { a: { b: 3, c: 'test'}}, and: 'fun'}, {color: false}), {
     changed: true,
     text: '{\n  test: {\n    a: {\n      c: 5 => "test"\n    }\n  }\n}'
   });
@@ -203,7 +203,7 @@ test('object nested object different', function(t) {
 });
 
 test('object keys removed', function(t) {
-  t.same(diff({ a: 1, b: 2, c: 3}, { a: 1 }), {
+  t.same(diff({ a: 1, b: 2, c: 3}, { a: 1 }, {color: false}), {
     changed: true,
     text: '{\n- b: 2\n- c: 3\n}'
   });
@@ -211,7 +211,7 @@ test('object keys removed', function(t) {
 });
 
 test('object keys added', function(t) {
-  t.same(diff({ a: 1 }, { a: 1, b: 9, c: 2 }), {
+  t.same(diff({ a: 1 }, { a: 1, b: 9, c: 2 }, {color: false}), {
     changed: true,
     text: '{\n+ b: 9\n+ c: 2\n}'
   });
@@ -219,7 +219,7 @@ test('object keys added', function(t) {
 });
 
 test('object with nested array', function(t) {
-  t.same(diff({ test: { a: [5,6,7]}, and: 'fun'}, { test: { a: [9,8,2,4]}, and: 'fun'}), {
+  t.same(diff({ test: { a: [5,6,7]}, and: 'fun'}, { test: { a: [9,8,2,4]}, and: 'fun'}, {color: false}), {
     changed: true,
     text: '{\n  test: {\n    a: [\n      0: 5 => 9\n      1: 6 => 8\n      2: 7 => 2\n    + 3: 4\n    ]\n  }\n}'
   });
@@ -227,7 +227,7 @@ test('object with nested array', function(t) {
 });
 
 test('complex nested object difference', function(t) {
-  t.same(diff({ test: { a: [5,6,7]}, b: { c: 1 }, and: 'fun'}, { test: { a: [9,8,2,4]}, b: {d: 2 }, and: [1,2]}), {
+  t.same(diff({ test: { a: [5,6,7]}, b: { c: 1 }, and: 'fun'}, { test: { a: [9,8,2,4]}, b: {d: 2 }, and: [1,2]}, {color: false}), {
     changed: true,
     text: '{\n  and: "fun" => [1,2]\n  b: {\n  - c: 1\n  + d: 2\n  }\n  test: {\n    a: [\n      0: 5 => 9\n      1: 6 => 8\n      2: 7 => 2\n    + 3: 4\n    ]\n  }\n}'
   });
