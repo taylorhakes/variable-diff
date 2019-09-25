@@ -13,6 +13,10 @@ npm install variable-diff
 ```js
 var diff = require('variable-diff');
 
+var result = diff({ a: 1, b: 2, d: 'hello' }, { a: 8, b: 2, c: 4});
+console.log(result.text);
+
+// You can pass all or some of these options
 var defaultOptions = {
   indent: '  ',
   newLine: '\n',
@@ -22,8 +26,7 @@ var defaultOptions = {
   color: true
 };
 
-var result = diff({ a: 1, b: 2, d: 'hello' }, { a: 8, b: 2, c: 4}, defaultOptions);
-console.log(result.text);
+diff({ a: 1, b: 2, d: 'hello' }, { a: 8, b: 2, c: 4}, defaultOptions)
 ```
 
 
