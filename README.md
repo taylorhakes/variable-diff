@@ -23,7 +23,7 @@ var defaultOptions = {
 var result = diff({ a: 1, b: 2, d: 'hello' }, { a: 8, b: 2, c: 4}, defaultOptions);
 console.log(result.text);
 ```
-
+![Screenshot](.github/screenshot.png)
 
 ### Test
 ```
