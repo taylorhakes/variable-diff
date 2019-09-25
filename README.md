@@ -3,6 +3,8 @@ Visual diff between 2 javascript variables. Shows only the difference and ignore
 
 [![Build Status](https://travis-ci.org/taylorhakes/variable-diff.svg?branch=master)](https://travis-ci.org/taylorhakes/variable-diff)
 
+![Screenshot](.github/screenshot.png)
+
 ## Use
 ```
 npm install variable-diff
@@ -23,7 +25,7 @@ var defaultOptions = {
 var result = diff({ a: 1, b: 2, d: 'hello' }, { a: 8, b: 2, c: 4}, defaultOptions);
 console.log(result.text);
 ```
-![Screenshot](.github/screenshot.png)
+
 
 ### Test
 ```
