@@ -11,6 +11,9 @@ var typeColors = {
 var defaultOptions = {
   indent: '  ',
   newLine: '\n',
+  printVar: function printVar (variable) {
+    return JSON.stringify(variable);
+  },
   wrap: function wrap(type, text) {
     return chalk[typeColors[type]](text);
   },
@@ -21,11 +24,11 @@ function isObject(obj) {
   return typeof obj === 'object' && obj && !Array.isArray(obj);
 }
 
-function printVar(variable) {
+function printVar(variable, options) {
   if (typeof variable === 'function') {
     return variable.toString().replace(/\{.+\}/,'{}');
   } else if((typeof variable === 'object' || typeof variable === 'string') && !(variable instanceof RegExp)) {
-    return JSON.stringify(variable);
+    return options.printVar(variable)
   }
 
   return '' + variable;
@@ -45,11 +48,11 @@ function keyChanged(key, text, options) {
 }
 
 function keyRemoved(key, variable, options) {
-  return options.wrap('removed', '- ' + key + ': ' + printVar(variable)) + options.newLine;
+  return options.wrap('removed', '- ' + key + ': ' + printVar(variable, options)) + options.newLine;
 }
 
 function keyAdded(key, variable, options) {
-  return options.wrap('added', '+ ' + key + ': ' + printVar(variable)) + options.newLine;
+  return options.wrap('added', '+ ' + key + ': ' + printVar(variable, options)) + options.newLine;
 }
 
 function diffInternal(left, right, options) {
@@ -112,7 +115,7 @@ function diffInternal(left, right, options) {
     }
 
   } else if (left !== right) {
-    text = options.wrap('modified', printVar(left) + ' => ' + printVar(right));
+    text = options.wrap('modified', printVar(left, options) + ' => ' + printVar(right, options));
     changed = true;
   }
 
