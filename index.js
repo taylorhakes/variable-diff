@@ -28,7 +28,7 @@ function printVar(variable, options) {
   if (typeof variable === 'function') {
     return variable.toString().replace(/\{.+\}/,'{}');
   } else if((typeof variable === 'object' || typeof variable === 'string') && !(variable instanceof RegExp)) {
-    return options.printVar(variable)
+    return options.printVar(variable);
   }
 
   return '' + variable;
