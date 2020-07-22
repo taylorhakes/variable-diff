@@ -1,13 +1,14 @@
 {
   "name": "variable-diff",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Visual diff between javascript variables",
-  "main": "index.js",
+  "main": "index",
+  "types": "index.d.ts",
   "dependencies": {
-    "chalk": "^1.1.1"
+    "chalk": "^4.1.0"
   },
   "devDependencies": {
-    "tap": "^14.6.5"
+    "tap": "^14.10.8"
   },
   "scripts": {
     "test": "tap test.js"
